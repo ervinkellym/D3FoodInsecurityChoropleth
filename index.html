@@ -1,17 +1,49 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset='UTF'>
-    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
-    <link rel='stylesheet' href='./style.css'>
-    <script src='https://d3js.org/d3.v5.min.js'></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./style.css">
+    <script src="https://d3js.org/d3.v5.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/topojson/3.0.2/topojson.min.js" integrity="sha256-tHoAPGoNdhIR28YHl9DWLzeRfdwigkH7OCBXMrHXhoM=" crossorigin="anonymous"></script>
     <title>Choropleth Map</title>
 </head>
 <body>
-    <h2 id='title'>United States Food Access</h2>
-<div id='description'>Percentage of adults age 25 and older with a bachelor's degree or higher (2010-2014). Source: <a href='https://www.ers.usda.gov/data-products/county-level-data-sets/download-data.aspx'>USDA Economic Research Service</a></div>
-    <svg id='canvas'></svg>
+    <h2 id='title'>United States Poverty Rates by County</h2>
+    <div id='container'>
+        <svg id='canvas'></svg>
+        <div id='rightSide'>
+            <div id='tooltip'></div>
+            <svg id='legend'>
+                <g>
+                    <rect x="10" y="0" width="40" height="20" fill="lightgrey"></rect>
+                    <text x="60" y="15" fill="darkslategray">No data available</text>
+                </g>
+                <g>
+                    <rect x="10" y="24" width="40" height="20" fill="limegreen"></rect>
+                    <text x="60" y="39" fill="darkslategray">Less than 10%</text>
+                </g>
+                <g>
+                    <rect x="10" y="48" width="40" height="20" fill="lightgreen"></rect>
+                    <text x="60" y="63" fill="darkslategray">10% to 20%</text>
+                </g>
+                <g>
+                    <rect x="10" y="72" width="40" height="20" fill="orange"></rect>
+                    <text x="60" y="87" fill="darkslategray">20% to 30%</text>
+                </g>
+                <g>
+                    <rect x="10" y="96" width="40" height="20" fill="gold"></rect>
+                    <text x="60" y="111" fill="darkslategray">30% to 40%</text>
+                </g>
+                <g>
+                    <rect x="10" y="120" width="40" height="20" fill="tomato"></rect>
+                    <text x="60" y="135" fill="darkslategray">More than 40%</text>
+                </g>
+            </svg>
+            <div id='description'>Poverty Rates in US Counties</div>
+            <div>Source: <a href='https://www.ers.usda.gov/data-products/food-access-research-atlas/download-the-data/'>USDA Economic Research Service</a></div>
+        </div>
+    </div>
 </body>
 <script defer src='script.js'></script>
 </html>
