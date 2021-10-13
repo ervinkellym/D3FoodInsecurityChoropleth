@@ -9,39 +9,55 @@
     <title>Choropleth Map</title>
 </head>
 <body>
-    <h2 id='title'>United States Poverty Rates by County</h2>
+    <h2 id='title'>Poverty Rates and Food Access Factors in US Counties</h2>
     <div id='container'>
         <svg id='canvas'></svg>
         <div id='rightSide'>
+            <div id='story'>"Low access" is defined here as living over 1/2 mile away from the nearest 
+                supermarket. This one factor alone doesn't mean a person lives in a food desert. However,
+                 when combined with other factors such as poverty rates and percentages of the 
+                 population that don't have vehicle access, are children, or are on SNAP. Compare the 
+                 maps for each factor and see where these factors overlap. Think about what might be 
+                causing these correlations.</div>
+            <div id='selector'>
+                <form action="#">
+                    <label id="selectlabel" for="val">Select a Variable:</label>
+                    <select id='selectionList' name="values" size="4" onchange='updateMap()'>
+                        <option value='poverty_%'>Poverty</option>
+                        <option value='la_kids_%'>Low Access Children</option>
+                        <option value='la_novehicle_%'>Low Access No Vehicle</option>
+                        <option value='la_snap_%'>Low Access SNAP</option>
+                    </select>
+                </form>
+            </div>
             <div id='tooltip'></div>
             <svg id='legend'>
                 <g>
-                    <rect x="10" y="0" width="40" height="20" fill="lightgrey"></rect>
+                    <rect x="10" y="0" width="40" height="20" fill="lightgray"></rect>
                     <text x="60" y="15" fill="darkslategray">No data available</text>
                 </g>
                 <g>
-                    <rect x="10" y="24" width="40" height="20" fill="limegreen"></rect>
-                    <text x="60" y="39" fill="darkslategray">Less than 10%</text>
+                    <rect x="10" y="25" width="40" height="20" fill="lightsteelblue"></rect>
+                    <text x="60" y="40" fill="darkslategray">Less than 5%</text>
                 </g>
                 <g>
-                    <rect x="10" y="48" width="40" height="20" fill="lightgreen"></rect>
-                    <text x="60" y="63" fill="darkslategray">10% to 20%</text>
+                    <rect x="10" y="50" width="40" height="20" fill="cornflowerblue"></rect>
+                    <text x="60" y="65" fill="darkslategray">5% to 15%</text>
                 </g>
                 <g>
-                    <rect x="10" y="72" width="40" height="20" fill="orange"></rect>
-                    <text x="60" y="87" fill="darkslategray">20% to 30%</text>
+                    <rect x="10" y="75" width="40" height="20" fill="royalblue"></rect>
+                    <text x="60" y="90" fill="darkslategray">15% to 25%</text>
                 </g>
                 <g>
-                    <rect x="10" y="96" width="40" height="20" fill="gold"></rect>
-                    <text x="60" y="111" fill="darkslategray">30% to 40%</text>
+                    <rect x="10" y="100" width="40" height="20" fill="mediumblue"></rect>
+                    <text x="60" y="115" fill="darkslategray">25% to 35%</text>
                 </g>
                 <g>
-                    <rect x="10" y="120" width="40" height="20" fill="tomato"></rect>
-                    <text x="60" y="135" fill="darkslategray">More than 40%</text>
+                    <rect x="10" y="125" width="40" height="20" fill="midnightblue"></rect>
+                    <text x="60" y="140" fill="darkslategray">More than 35%</text>
                 </g>
             </svg>
-            <div id='description'>Poverty Rates in US Counties</div>
-            <div>Source: <a href='https://www.ers.usda.gov/data-products/food-access-research-atlas/download-the-data/'>USDA Economic Research Service</a></div>
+            <div id='description'>Source: <a href='https://www.ers.usda.gov/data-products/food-access-research-atlas/download-the-data/'>USDA Economic Research Service</a></div>
         </div>
     </div>
 </body>

@@ -13,21 +13,27 @@ let drawMap = () => {
         .enter()
         .append('path')
         .attr('d', d3.geoPath())
-        .attr('class', 'county')
+        .attr('class', 'county');
+}
+
+let updateMap = () => {
+    var selected = document.getElementById("selectionList").selectedOptions[0];  
+    var dataVal = (selected === undefined) ? "poverty_%" : selected.value;
+    canvas.selectAll('path')
         .attr('fill', (item) => {
             let fips = item['id']
             let county = foodAccessData.find((county) => { return county['fips'] === fips; });
             if (county === undefined) { return 'lightgrey'; }
-            let percentage = county['poverty_%'];
-            if (percentage <= 10) {
-                return 'limegreen';
-            } else if (percentage <= 20) {
-                return 'lightgreen';
-            } else if (percentage <= 30) {
-                return 'gold';
-            } else if (percentage <= 40) {
-                return 'orange';
-            } else { return 'tomato'; }
+            let percentage = county[dataVal];
+            if (percentage <= 5) {
+                return 'lightsteelblue';
+            } else if (percentage <= 15) {
+                return 'cornflowerblue';
+            } else if (percentage <= 25) {
+                return 'royalblue';
+            } else if (percentage <= 35) {
+                return 'mediumblue';
+            } else { return 'midnightblue'; }
         })
         .attr('data-fips', (item) => {
             return item['id']
@@ -36,7 +42,7 @@ let drawMap = () => {
             let fips = item['id']
             let county = foodAccessData.find((county) => { return county['fips'] === fips; });
             if (county === undefined) { return 0; }
-            return county['poverty_%'];
+            return county[dataVal];
         })
         .on('mouseover', (countyDataItem) => {
             tooltip.transition().style('visibility', 'visible');
@@ -46,8 +52,8 @@ let drawMap = () => {
             if (county === undefined) {
                 tooltip.text('Data not available');
             } else {
-                tooltip.text(county['name'] + ', ' + county['state'] + ' : ' + county['poverty_%'] + '%');
-                tooltip.attr('poverty-rate', county['poverty_%']);
+                tooltip.text(county['name'] + ', ' + county['state'] + ' : ' + county[dataVal] + '%');
+                tooltip.attr('poverty-rate', county[dataVal]);
             }
         })
         .on('mouseout', (countyDataItem) => { tooltip.transition().style('visibility', 'hidden'); });
